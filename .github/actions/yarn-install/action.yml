@@ -44,7 +44,9 @@ runs:
       uses: buildjet/cache@v4
       with:
         path: "**/node_modules/"
-        key: ${{ runner.os }}-yarn-nm-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml') }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
 
     # Invalidated on yarn.lock changes
     - name: Restore yarn install state
